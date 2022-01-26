@@ -1,7 +1,7 @@
 Summary:	mold: A Modern Linker
 Name:		mold
 Version:	1.0.2
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -30,13 +30,12 @@ especially in rapid debug-edit-rebuild cycles.
 %{__rm} -r third-party/{mimalloc,tbb}
 
 %build
-export CPPFLAGS="%{rpmcppflags}"
-export CFLAGS="%{rpmcflags}"
-export CXXFLAGS="%{rpmcxxflags}"
-export LDFLAGS="%{rpmldflags}"
 %{__make} \
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
+	CFLAGS="%{rpmcppflags} %{rpmcflags}" \
+	CXXFLAGS="%{rpmcppflags} %{rpmcxxflags}" \
+	LDFLAGS="%{rpmldflags}" \
 	SYSTEM_MIMALLOC=1 \
 	SYSTEM_TBB=1 \
 	PREFIX="%{_prefix}" \
