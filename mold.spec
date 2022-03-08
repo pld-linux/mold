@@ -1,11 +1,11 @@
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.1
+Version:	1.1.1
 Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	fa5df61762cdce46a69e9f6aa39bf9e5
+# Source0-md5:	49a64a18376bb6b216c05a900f4aacae
 URL:		https://github.com/rui314/mold
 BuildRequires:	libstdc++-devel >= 6:10
 BuildRequires:	mimalloc-devel >= 1.7
