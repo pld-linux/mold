@@ -1,11 +1,11 @@
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.1.1
+Version:	1.2.0
 Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	49a64a18376bb6b216c05a900f4aacae
+# Source0-md5:	6e9dba635bd3ed1d39a8fe6411a2005e
 URL:		https://github.com/rui314/mold
 BuildRequires:	libstdc++-devel >= 6:10
 BuildRequires:	mimalloc-devel >= 1.7
@@ -15,7 +15,7 @@ BuildRequires:	tbb-devel >= 2021.3.0
 BuildRequires:	zlib-devel
 Requires:	mimalloc >= 1.7
 Requires:	tbb >= 2021.3.0
-ExclusiveArch:	%{ix86} %{x8664} aarch64 riscv64
+ExclusiveArch:	%{ix86} %{x8664} %{arm} aarch64 riscv64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
