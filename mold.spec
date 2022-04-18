@@ -15,6 +15,7 @@ BuildRequires:	tbb-devel >= 2021.3.0
 BuildRequires:	zlib-devel
 Requires:	mimalloc >= 1.7
 Requires:	tbb >= 2021.3.0
+ExclusiveArch:	%{ix86} %{x8664} aarch64 riscv64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
