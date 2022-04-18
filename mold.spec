@@ -6,11 +6,16 @@ License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	6e9dba635bd3ed1d39a8fe6411a2005e
+Patch0:		atomic.patch
 URL:		https://github.com/rui314/mold
+%ifarch %{armv6} riscv64
+BuildRequires:	libatomic-devel
+%endif
 BuildRequires:	libstdc++-devel >= 6:10
 BuildRequires:	mimalloc-devel >= 1.7
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	tbb-devel >= 2021.3.0
 BuildRequires:	zlib-devel
 Requires:	mimalloc >= 1.7
@@ -27,11 +32,13 @@ especially in rapid debug-edit-rebuild cycles.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__rm} -r third-party/{mimalloc,tbb}
 
 %build
 %{__make} \
+	ARCH="%{_target_cpu}" \
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
 	CFLAGS="%{rpmcppflags} %{rpmcflags}" \
