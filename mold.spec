@@ -1,11 +1,11 @@
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.2.0
+Version:	1.2.1
 Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	6e9dba635bd3ed1d39a8fe6411a2005e
+# Source0-md5:	69ba53ea65a09354a5cec09d9c574472
 Patch0:		atomic.patch
 URL:		https://github.com/rui314/mold
 %ifarch %{armv6} riscv64
