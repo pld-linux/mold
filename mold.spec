@@ -1,11 +1,11 @@
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.2.1
+Version:	1.3.0
 Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	69ba53ea65a09354a5cec09d9c574472
+# Source0-md5:	f7ed6a7246e6ef945494f51e70072ad4
 Patch0:		atomic.patch
 URL:		https://github.com/rui314/mold
 %ifarch %{armv6} riscv64
@@ -14,7 +14,6 @@ BuildRequires:	libatomic-devel
 BuildRequires:	libstdc++-devel >= 6:10
 BuildRequires:	mimalloc-devel >= 1.7
 BuildRequires:	openssl-devel
-BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	tbb-devel >= 2021.3.0
 BuildRequires:	zlib-devel
