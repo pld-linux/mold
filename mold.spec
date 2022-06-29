@@ -7,6 +7,7 @@ Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	f7ed6a7246e6ef945494f51e70072ad4
 Patch0:		atomic.patch
+Patch1:		arm32-reloc.patch
 URL:		https://github.com/rui314/mold
 %ifarch %{armv6} riscv64
 BuildRequires:	libatomic-devel
@@ -32,6 +33,7 @@ especially in rapid debug-edit-rebuild cycles.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %{__rm} -r third-party/{mimalloc,tbb}
 

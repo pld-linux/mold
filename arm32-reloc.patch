@@ -1,0 +1,25 @@
+From 52943009b7dce4a0ebb5943092d47e6e33625401 Mon Sep 17 00:00:00 2001
+From: Rui Ueyama <ruiu@bluewhale.systems>
+Date: Sun, 19 Jun 2022 11:28:37 +0800
+Subject: [PATCH] [ELF] Handle R_ARM_MOVT_PREL and R_ARM_PREL31 as
+ non-address-taking relocations
+
+This is an attempt to fix https://github.com/rui314/mold/issues/545 though
+I don't know if this is a correct fix.
+---
+ elf/arch-arm32.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/elf/arch-arm32.cc b/elf/arch-arm32.cc
+index 65a9dede..1b94e931 100644
+--- a/elf/arch-arm32.cc
++++ b/elf/arch-arm32.cc
+@@ -427,7 +427,7 @@ void InputSection<E>::scan_relocations(Context<E> &ctx) {
+     case R_ARM_PREL31: {
+       Action table[][4] = {
+         // Absolute  Local    Imported data  Imported code
+-        {  ERROR,    NONE,    ERROR,         ERROR },      // DSO
++        {  ERROR,    NONE,    ERROR,         PLT   },      // DSO
+         {  ERROR,    NONE,    COPYREL,       PLT   },      // PIE
+         {  NONE,     NONE,    COPYREL,       PLT   },      // PDE
+       };
