@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	tests		# build without tests
+
 Summary:	mold: A Modern Linker
 Name:		mold
 Version:	1.3.0
@@ -9,10 +13,12 @@ Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.t
 Patch0:		atomic.patch
 Patch1:		arm32-reloc.patch
 URL:		https://github.com/rui314/mold
+%{?with_tests:BuildRequires:	glibc-static}
 %ifarch %{armv6} riscv64
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libstdc++-devel >= 6:10
+%{?with_tests:BuildRequires:	libstdc++-static >= 6:10}
 BuildRequires:	mimalloc-devel >= 1.7
 BuildRequires:	openssl-devel
 BuildRequires:	rpmbuild(macros) >= 2.007
@@ -51,6 +57,17 @@ especially in rapid debug-edit-rebuild cycles.
 	BINDIR="%{_bindir}" \
 	LIBDIR="%{_libdir}" \
 	MANDIR="%{_mandir}"
+
+%if %{with tests}
+%{__make} check \
+	MACHINE="%{_target_cpu}" \
+	TEST_CC="%{__cc}" \
+	TEST_GCC="%{__cc}" \
+	TEST_CXX="%{__cxx}" \
+	TEST_GXX="%{__cxx}" \
+	SYSTEM_MIMALLOC=1 \
+	SYSTEM_TBB=1
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
