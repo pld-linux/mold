@@ -10,6 +10,7 @@ License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	e21fff1962e98787ea0636d68d6369af
+Patch0:		arm-exception-crash.patch
 URL:		https://github.com/rui314/mold
 %{?with_tests:BuildRequires:	glibc-static}
 %ifarch %{armv6} riscv64
@@ -36,6 +37,7 @@ especially in rapid debug-edit-rebuild cycles.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__rm} -r third-party/{mimalloc,tbb}
 
