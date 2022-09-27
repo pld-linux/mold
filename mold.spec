@@ -4,13 +4,15 @@
 
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.4.2
+Version:	1.5.0
 Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	3a9891b330789fe04fbcced05b5fffe2
+# Source0-md5:	bd4e4d7c8430821d82773f723454cacd
+Patch0:		absolute-install-paths.patch
 URL:		https://github.com/rui314/mold
+BuildRequires:	cmake >= 3.13
 %{?with_tests:BuildRequires:	glibc-static}
 %ifarch %{armv6} riscv64
 BuildRequires:	libatomic-devel
@@ -22,9 +24,10 @@ BuildRequires:	openssl-devel
 BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	tbb-devel >= 2021.3.0
 BuildRequires:	zlib-devel
+BuildRequires:	zstd-devel
 Requires:	mimalloc >= 1.7
 Requires:	tbb >= 2021.3.0
-ExclusiveArch:	%{ix86} %{x8664} %{arm} aarch64 riscv64
+ExclusiveArch:	%{ix86} %{x8664} %{arm} aarch64 ppc64le riscv64 sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -36,47 +39,28 @@ especially in rapid debug-edit-rebuild cycles.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__rm} -r third-party/{mimalloc,tbb}
 
 %build
-%{__make} \
-	ARCH="%{_target_cpu}" \
-	CC="%{__cc}" \
-	CXX="%{__cxx}" \
-	CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-	CXXFLAGS="%{rpmcppflags} %{rpmcxxflags}" \
-	LDFLAGS="%{rpmldflags}" \
-	SYSTEM_MIMALLOC=1 \
-	SYSTEM_TBB=1 \
-	PREFIX="%{_prefix}" \
-	BINDIR="%{_bindir}" \
-	LIBDIR="%{_libdir}" \
-	MANDIR="%{_mandir}"
+%cmake -B build \
+	%{cmake_on_off tests BUILD_TESTING} \
+	-DMOLD_USE_MIMALLOC:BOOL=ON \
+	-DMOLD_USE_SYSTEM_MIMALLOC:BOOL=ON \
+	-DMOLD_USE_SYSTEM_TBB:BOOL=ON
+
+%{__make} -C build
 
 %if %{with tests}
-%{__make} check \
-	MACHINE="%{_target_cpu}" \
-	TEST_CC="%{__cc}" \
-	TEST_GCC="%{__cc}" \
-	TEST_CXX="%{__cxx}" \
-	TEST_GXX="%{__cxx}" \
-	SYSTEM_MIMALLOC=1 \
-	SYSTEM_TBB=1
+%{__make} -C build test
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	D=$RPM_BUILD_ROOT \
-	SYSTEM_MIMALLOC=1 \
-	SYSTEM_TBB=1 \
-	STRIP=: \
-	PREFIX="%{_prefix}" \
-	BINDIR="%{_bindir}" \
-	LIBDIR="%{_libdir}" \
-	MANDIR="%{_mandir}"
+%{__make} -C build install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
