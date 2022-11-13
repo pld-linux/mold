@@ -4,13 +4,12 @@
 
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.6.0
-Release:	2
+Version:	1.7.0
+Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	f6eb0adbc0ebd5dc75aed698bddd1a0e
-Patch0:		x86-nonpic.patch
+# Source0-md5:	fc81cda0d7d3335582a715624f307d36
 URL:		https://github.com/rui314/mold
 BuildRequires:	cmake >= 3.13
 %{?with_tests:BuildRequires:	glibc-static}
@@ -39,7 +38,6 @@ especially in rapid debug-edit-rebuild cycles.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %{__rm} -r third-party/{mimalloc,tbb}
 
