@@ -26,7 +26,7 @@ BuildRequires:	zlib-devel
 BuildRequires:	zstd-devel
 Requires:	mimalloc >= 1.7
 Requires:	tbb >= 2021.3.0
-ExclusiveArch:	%{ix86} %{x8664} %{arm} aarch64 ppc64le riscv64 sparc64
+ExclusiveArch:	%{ix86} %{x8664} %{arm} aarch64 m68k ppc64 ppc64le riscv32 riscv64 s390x sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
