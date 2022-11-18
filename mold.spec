@@ -4,12 +4,12 @@
 
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.7.0
+Version:	1.7.1
 Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	fc81cda0d7d3335582a715624f307d36
+# Source0-md5:	112e183443097e91576b6cc7d5226328
 URL:		https://github.com/rui314/mold
 BuildRequires:	cmake >= 3.13
 %{?with_tests:BuildRequires:	glibc-static}
