@@ -4,12 +4,12 @@
 
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	1.7.1
+Version:	1.8.0
 Release:	1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	112e183443097e91576b6cc7d5226328
+# Source0-md5:	6f1008050250b47f5f963d3bcd2fe43e
 URL:		https://github.com/rui314/mold
 BuildRequires:	cmake >= 3.13
 %{?with_tests:BuildRequires:	glibc-static}
@@ -67,7 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CONTRIBUTING.md README.md docs/*.md
 %attr(755,root,root) %{_bindir}/ld.mold
-%attr(755,root,root) %{_bindir}/ld64.mold
 %attr(755,root,root) %{_bindir}/mold
 %dir %{_libdir}/mold
 %attr(755,root,root) %{_libdir}/mold/mold-wrapper.so
