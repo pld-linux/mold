@@ -4,12 +4,12 @@
 
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	2.4.1
+Version:	2.30.0
 Release:	1
 License:	MIT
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	c25b000b233d683940ebd597ea9c5d93
+# Source0-md5:	061da806be174abe79d87c3a439f982f
 URL:		https://github.com/rui314/mold
 BuildRequires:	blake3-devel
 BuildRequires:	cmake >= 3.14
