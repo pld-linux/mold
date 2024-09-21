@@ -5,12 +5,13 @@
 Summary:	mold: A Modern Linker
 Name:		mold
 Version:	2.33.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	3a860c9aabdf1a186cd0a0d084252105
 Patch0:		icf-all.patch
+Patch1:		retain_symbols.patch
 URL:		https://github.com/rui314/mold
 BuildRequires:	blake3-devel
 BuildRequires:	cmake >= 3.14
@@ -40,6 +41,7 @@ especially in rapid debug-edit-rebuild cycles.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %{__rm} -r third-party/{mimalloc,tbb}
 
