@@ -5,11 +5,12 @@
 Summary:	mold: A Modern Linker
 Name:		mold
 Version:	2.38.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	28d611644ecfdb7a1e1c443ed76fa4e8
+Patch0:		1449.patch
 URL:		https://github.com/rui314/mold
 BuildRequires:	blake3-devel
 BuildRequires:	cmake >= 3.14
@@ -38,6 +39,7 @@ especially in rapid debug-edit-rebuild cycles.
 
 %prep
 %setup -q
+%patch -P0 -p1
 
 %{__rm} -r third-party/{mimalloc,tbb}
 
