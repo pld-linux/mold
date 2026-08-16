@@ -4,12 +4,12 @@
 
 Summary:	mold: A Modern Linker
 Name:		mold
-Version:	2.41.0
+Version:	2.42.0
 Release:	1
 License:	MIT
 Group:		Development/Libraries
 Source0:	https://github.com/rui314/mold/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	258c1456ea2716c1c63c3fa4595c9041
+# Source0-md5:	088183181df1ac800653330aaa796206
 URL:		https://github.com/rui314/mold
 BuildRequires:	blake3-devel
 BuildRequires:	cmake >= 3.14
@@ -19,12 +19,12 @@ BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libstdc++-devel >= 6:10
 %{?with_tests:BuildRequires:	libstdc++-static >= 6:10}
-BuildRequires:	mimalloc-devel >= 1.7
+BuildRequires:	mimalloc-devel >= 3
 BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	tbb-devel >= 2021.3.0
 BuildRequires:	zlib-devel
 BuildRequires:	zstd-devel
-Requires:	mimalloc >= 1.7
+Requires:	mimalloc >= 3
 Requires:	tbb >= 2021.3.0
 ExclusiveArch:	%{ix86} %{x8664} %{arm} aarch64 m68k ppc64 ppc64le riscv32 riscv64 s390x sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
